@@ -1,0 +1,73 @@
+// code for least slack time with gantt chart
+
+#include<stdio.h>
+int main()
+{
+	int N,b_t,i,j,given_t,exec,LST,total_t,f;
+
+	printf("\nEnter the number of process: ");
+	scanf("%d",&N);
+	int c_t[N][3];
+						
+	total_t = 0;
+	for(i=0;i<N;i++)
+	{		
+		printf("\nEnter the release time for process %d: ",i+1);
+		scanf("%d",&c_t[i][0]);
+		
+		printf("\nEnter the Deadline for process %d: ",i+1);
+		scanf("%d",&c_t[i][1]);
+		
+		printf("\nEnter the Execution time for process %d: ",i+1);
+		scanf("%d",&c_t[i][2]);	
+		total_t+=c_t[i][2];
+	}
+
+	int done[N][total_t];
+	for(i=0;i<N;i++)
+	{
+		for(j=0;j<total_t;j++)
+		{
+			done[i][j]=0;
+		}
+	}
+
+	for(given_t=0;given_t<total_t;given_t++)
+	{		
+		f = 0;
+		for(i=0;i<N;i++)
+		{
+			if(c_t[i][2]>0)
+			{		
+				if(c_t[i][0]<=given_t)
+				{
+					if(f==0)
+					{	
+						LST = c_t[i][1]-given_t-c_t[i][2];
+						exec = i;
+						f = 1;
+					}
+					
+					if(c_t[i][1]-given_t-c_t[i][2] < LST)
+						exec = i;
+				}
+				else
+					break;					
+			}
+		}
+		c_t[exec][2] -= 1;			
+		done[exec][given_t] = 1;
+	}
+
+	printf("\n\t\tGantt Chart for LST Algorithm");
+	for(i=0;i<N;i++)
+	{
+		printf("\n\t c_t %d: ",i+1);
+		for(j=0;j<total_t;j++)
+		{
+			printf("%2d ",done[i][j]);
+		}
+	}
+	printf("\n");
+	return 0;
+}
