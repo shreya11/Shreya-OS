@@ -1,0 +1,53 @@
+//FCFS code and display their turnaround and waiting time 
+
+#include<stdio.h>
+#include<stdlib.h>
+
+
+void time(int t)
+{
+int c[t];
+int i,j;
+int d[t];
+int f=0;
+int g=0;
+for(i=0;i<t;i++)
+{
+	printf("\nEnter the burst time of the processes: ");
+	scanf("%d",&c[i]);
+}
+
+printf("\nturnaround and waiting: ");
+for(i=0;i<t;i++)
+{
+f=f+c[i];
+	printf("\n %d", c[i]);
+	printf("\npro %d: %d, %d", i+1,f,g);
+	
+		
+		g=g+c[i];
+}
+
+printf("\n");
+
+printf("\nTurn around time and waiting time of each process is: ");
+
+
+
+
+}
+int main()
+{
+int run, burst;
+int a;
+
+
+printf("Enter the number of processes: ");
+scanf("%d",&a);
+
+//printf("\nEnter the service time of each process: ");
+//scanf("%d",&burst);
+
+
+time(a);
+}
